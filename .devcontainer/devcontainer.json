@@ -2,13 +2,14 @@
     "name": "React-Python",
     "dockerFile": "Dockerfile",
     "context": "..",
-    "forwardPorts": [3000, 5000],
+    "forwardPorts": [3000, 5500],
     "customizations": {
         "vscode": {
             "extensions": [
                 "ms-python.python",
                 "dbaeumer.vscode-eslint",
-                "esbenp.prettier-vscode"
+                "esbenp.prettier-vscode",
+                "ms-azuretools.vscode-docker"
             ]
         }
     },

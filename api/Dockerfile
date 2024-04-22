@@ -10,8 +10,8 @@ ADD . /app
 # Install any needed packages specified in requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Make port 5000 available to the world outside this container
-EXPOSE 5000
+# Make port 5500 available to the world outside this container; 5000 is used AirPlay!!
+EXPOSE 5500
 
 # Run app.py when the container launches
 CMD ["python", "run.py"]

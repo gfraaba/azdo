@@ -1,0 +1,6 @@
+Flask==3.0.3
+Flask-Cors==4.0.0
+requests==2.31.0
+Flask-RESTful==0.3.10
+tinydb==4.8.0
+pipdeptree==2.18.1

@@ -42,4 +42,4 @@ WORKDIR /app
 ADD . /app
 
 # Install any needed packages specified in requirements.txt
-RUN pip install --no-cache-dir -r api/app/requirements.txt
+RUN pip install --no-cache-dir -r api/requirements.txt
