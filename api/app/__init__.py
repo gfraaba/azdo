@@ -1,12 +1,13 @@
-from flask import Flask
-from flask import jsonify
-# from flask_restful import Api
-# from .controllers import projects, repos, branches, commits
+from flask import Flask, jsonify
+from flask_restful import Api
+from .controllers import projects#, repos, branches, commits
+from .models.project import Project
+# from app.models.project import Project
 
 app = Flask(__name__)
-# api = Api(app)
+api = Api(app)
 
-# api.add_resource(projects.Projects, '/api/projects')
+api.add_resource(projects.Projects, '/api/projects')
 # api.add_resource(repos.Repos, '/api/repos')
 # api.add_resource(branches.Branches, '/api/branches')
 # api.add_resource(commits.Commits, '/api/commits')
@@ -42,6 +43,9 @@ mock_data = [
     # Add more projects here...
 ]
 
-@app.route('/api/projects', methods=['GET'])
-def get_projects():
-    return jsonify(mock_data)
+# Seed the database
+Project.seed(mock_data)
+
+# @app.route('/api/projects', methods=['GET'])
+# def get_projects():
+#     return jsonify(mock_data)

@@ -25,3 +25,9 @@ class Project:
     def delete(id):
         db.table('projects').remove(ProjectQuery.id == id)
         return '', 204
+    
+    @staticmethod
+    def seed(mock_data):
+        db.table('projects').truncate()
+        for project_data in mock_data:
+            db.table('projects').upsert(project_data, ProjectQuery.projectName == project_data['projectName'])
