@@ -10,6 +10,12 @@ class Project:
         return db.table('projects').all()
 
     @staticmethod
+    def get(id):
+        projects = db.table('projects')
+        result = projects.search(ProjectQuery.projectID == id)
+        return result[0] if result else None
+
+    @staticmethod
     def create():
         new_project = request.get_json()
         db.table('projects').insert(new_project)
@@ -18,12 +24,12 @@ class Project:
     @staticmethod
     def update(id):
         updated_project = request.get_json()
-        db.table('projects').update(updated_project, ProjectQuery.id == id)
+        db.table('projects').update(updated_project, ProjectQuery.projectID == id)
         return updated_project, 200
 
     @staticmethod
     def delete(id):
-        db.table('projects').remove(ProjectQuery.id == id)
+        db.table('projects').remove(ProjectQuery.projectID == id)
         return '', 204
     
     @staticmethod

@@ -14,11 +14,17 @@ class TestProjectsAPI(unittest.TestCase):
         # Seed the database
         Project.seed(mock_data)
 
-    def test_get_projects(self):
+    def test_get_projects_count(self):
         response = self.client.get('/api/projects')
         self.assertEqual(response.status_code, 200)
         data = json.loads(response.data)
-        self.assertEqual(data[0]['projectName'], 'Project 1')
+        self.assertEqual(len(data), 10)
+
+    def test_get_first_project(self):
+        response = self.client.get('/api/project/1')
+        self.assertEqual(response.status_code, 200)
+        data = json.loads(response.data)
+        self.assertEqual(data['projectName'], 'Apollo')
 
 if __name__ == '__main__':
     unittest.main()
