@@ -1,10 +1,22 @@
 {
     "name": "React-Python",
-    "dockerFile": "Dockerfile",
-    "context": "..",
+    "build": {
+        "dockerfile": "Dockerfile",
+        "context": "..",
+        "args": {
+            // Update 'VARIANT' to pick a Python version: 3, 3.12, 3.11
+            "VARIANT": "3",
+            // Update 'NODE_VERSION' to pick a Node.js version: 20, 16
+            "NODE_VERSION": "20"
+        }
+    },
+    "runArgs": ["--platform", "linux/arm64"],
     "forwardPorts": [3000, 5500],
     "customizations": {
         "vscode": {
+            "settings": {
+                "terminal.integrated.shell.linux": "/usr/bin/pwsh"
+            },
             "extensions": [
                 "ms-python.python",
                 "dbaeumer.vscode-eslint",
