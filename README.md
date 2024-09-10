@@ -1,3 +1,5 @@
+# *** On Windows machine first set a system environment variable called PLATFORM and set it to "linux/amd64"
+
 # azdo
 
 # Option #1: Run these in the host without needing to open VS Code and attach it to the Dev Container

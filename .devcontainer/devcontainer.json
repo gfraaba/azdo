@@ -4,17 +4,18 @@
         "dockerfile": "Dockerfile",
         "context": "..",
         "args": {
+            "PLATFORM": "${localEnv:PLATFORM:linux/arm64}",
             "PYTHON_VERSION": "3-slim-bookworm",
             "NODE_VERSION": "20",
             "PWSH_VERSION": "7.4.5"
         }
     },
-    "runArgs": ["--platform", "linux/arm64"],
+    "runArgs": ["--platform", "${localEnv:PLATFORM:linux/arm64}"],
     "forwardPorts": [3000, 5500],
     "customizations": {
         "vscode": {
             "settings": {
-                "terminal.integrated.shell.linux": "/usr/bin/pwsh"
+                "terminal.integrated.shell.linux": "/usr/bin/bash"
             },
             "extensions": [
                 "ms-python.python",
@@ -24,5 +25,5 @@
             ]
         }
     },
-    "postCreateCommand": "echo 'Container is ready!' && ls -la && pwsh --version"
+    "postCreateCommand": "export PLATFORM=$(uname -m | sed 's/x86_64/linux\\/amd64/;s/aarch64/linux\\/arm64/') && echo 'Container is ready!' && ls -la && pwsh --version"
 }
