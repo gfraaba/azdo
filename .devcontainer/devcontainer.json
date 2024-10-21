@@ -5,7 +5,7 @@
         "context": "..",
         "args": {
             "PLATFORM": "${localEnv:PLATFORM:linux/arm64}",
-            "PYTHON_VERSION": "3-slim-bookworm",
+            "PYTHON_IMAGE_TAG": "3-slim-bookworm",
             "NODE_VERSION": "20",
             "PWSH_VERSION": "7.4.5"
         }
@@ -25,5 +25,5 @@
             ]
         }
     },
-    "postCreateCommand": "export PLATFORM=$(uname -m | sed 's/x86_64/linux\\/amd64/;s/aarch64/linux\\/arm64/') && echo 'Container is ready!' && ls -la && pwsh --version"
+    "postCreateCommand": "export PLATFORM=$(uname -m | sed 's/x86_64/linux\\/amd64/;s/aarch64/linux\\/arm64/') && echo 'Container is ready!' && ls -la && echo 'Node.js version:' && node --version && echo 'npm version:' && npm --version && pwsh --version"
 }

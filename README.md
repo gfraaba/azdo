@@ -17,7 +17,7 @@ python3 -m unittest tests/test_projects.py
 python3 run.py
 #Browse to: http://localhost:5500/api/projects
 
-# Next, Run the Frontend
+# Next, Run the Frontend (in a new terminal)
 ### Development
 cd /workspaces/azdo/dashboard/
 npm install --save-dev @babel/plugin-proposal-private-property-in-object
