@@ -171,3 +171,6 @@ yarn.lock
 /public
 /dist
 /coverage
+
+# Ignore the 'scratchPad' directory
+scratchPad/

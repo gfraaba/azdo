@@ -8,8 +8,8 @@
 # Use build arguments for flexibility
 ARG PYTHON_IMAGE_TAG="3-slim-bookworm"
 ARG NODE_VERSION="20"
-ARG PWSH_VERSION="7.4.5"
-ARG PLATFORM="linux/arm64"
+ARG PWSH_VERSION
+ARG PLATFORM
 
 # Start from the Debian version specific latest Python base image
 FROM python:${PYTHON_IMAGE_TAG}
@@ -36,12 +36,11 @@ RUN if [ "$PLATFORM" = "linux/amd64" ]; then \
       && rm -rf /var/lib/apt/lists/*; \
     elif [ "$PLATFORM" = "linux/arm64" ]; then \
         wget https://github.com/PowerShell/PowerShell/releases/download/v${PWSH_VERSION}/powershell-${PWSH_VERSION}-linux-arm64.tar.gz \
-        && mkdir pwsh-${PWSH_VERSION} \
-        && tar -xvf powershell-${PWSH_VERSION}-linux-arm64.tar.gz -C pwsh-${PWSH_VERSION} \
+        && mkdir /usr/local/bin/pwsh${PWSH_VERSION} \
+        && tar -xvf powershell-${PWSH_VERSION}-linux-arm64.tar.gz -C /usr/local/bin/pwsh${PWSH_VERSION} \
+        && chmod +x /usr/local/bin/pwsh${PWSH_VERSION}/pwsh \
         && rm powershell-${PWSH_VERSION}-linux-arm64.tar.gz \
-        && mv pwsh-${PWSH_VERSION} /usr/local/bin/pwsh${PWSH_VERSION} \
-        && ln -s /usr/local/bin/pwsh${PWSH_VERSION}/pwsh /usr/bin/pwsh \
-        && chmod +x /usr/bin/pwsh \
+        && ln -s /usr/local/bin/pwsh${PWSH_VERSION}/pwsh /usr/local/bin/pwsh \
         # libicu is required for PowerShell; alternatively: export DOTNET_SYSTEM_GLOBALIZATION_INVARIANT=1
         && apt-get install -y libicu-dev \
         # Verify that PowerShell was installed correctly
@@ -58,6 +57,8 @@ RUN if [ "$PLATFORM" = "linux/amd64" ]; then \
       && sleep 20 \
       && exit 1; \
     fi
+
+ENV PLATFORM="$PLATFORM"
 
 # ARG ARCH
 # ARG PLATFORM

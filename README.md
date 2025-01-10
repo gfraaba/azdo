@@ -1,5 +1,23 @@
 # *** On Windows machine first set a system environment variable called PLATFORM and set it to "linux/amd64"
 
+# *** In macOS, add a new environment variable (~/.zshrc) called PLATFORM and set it to "linux/arm64":
+## Steps 
+
+1. **Open Zsh Terminal**:
+    - Run `code ~/.zshrc`
+2. **Use VS Code to update ~/.zshrc by adding the following line**: 
+    - Add new line: `export PLATFORM="linux/arm64"`
+3.  **Back to Zsh Terminal to Source the Just Updated ~/.zshrc**: 
+    - Run `source ~/.zshrc`
+    - Run `echo $PLATFORM`
+4. **Open Pwsh Terminal**:
+   - Run `echo $env:PLATFORM`
+
+***NOTE: Adding a new environment variable in ~/.zshrc will make it available to all other shells as well!***
+
+***Or, you can just skip these steps on macOS by using the default 'linux/arm64' if the 'localEnv:PLATFORM' results in null ***
+*** Here's the syntax: `"${localEnv:PLATFORM:linux/arm64}"` ***
+
 # azdo
 
 # Option #1: Run these in the host without needing to open VS Code and attach it to the Dev Container

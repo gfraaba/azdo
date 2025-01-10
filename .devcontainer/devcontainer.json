@@ -4,18 +4,23 @@
         "dockerfile": "Dockerfile",
         "context": "..",
         "args": {
-            "PLATFORM": "${localEnv:PLATFORM:linux/arm64}",
+            "PLATFORM": "${localEnv:PLATFORM}",
             "PYTHON_IMAGE_TAG": "3-slim-bookworm",
             "NODE_VERSION": "20",
-            "PWSH_VERSION": "7.4.5"
+            "PWSH_VERSION": "7.4.6"
         }
     },
-    "runArgs": ["--platform", "${localEnv:PLATFORM:linux/arm64}"],
+    "runArgs": ["--platform", "${localEnv:PLATFORM}"],
     "forwardPorts": [3000, 5500],
     "customizations": {
         "vscode": {
             "settings": {
-                "terminal.integrated.shell.linux": "/usr/bin/bash"
+                "terminal.integrated.profiles.linux": { 
+                    "pwsh": { 
+                        "path": "/usr/local/bin/pwsh" 
+                    } 
+                }, 
+                "terminal.integrated.defaultProfile.linux": "pwsh"
             },
             "extensions": [
                 "ms-python.python",
@@ -25,5 +30,5 @@
             ]
         }
     },
-    "postCreateCommand": "export PLATFORM=$(uname -m | sed 's/x86_64/linux\\/amd64/;s/aarch64/linux\\/arm64/') && echo 'Container is ready!' && ls -la && echo 'Node.js version:' && node --version && echo 'npm version:' && npm --version && pwsh --version"
+    "postCreateCommand": "export PLATFORM=$(uname -m | sed 's/x86_64/linux\\/amd64/;s/aarch64/linux\\/arm64/') && echo 'Container is ready!' && ls -la && echo 'Node.js version:' && node --version && echo 'npm version:' && npm --version && pwsh --version && echo $PLATFORM"
 }
